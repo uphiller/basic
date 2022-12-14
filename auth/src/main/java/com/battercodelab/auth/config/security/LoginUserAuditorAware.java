@@ -1,7 +1,7 @@
-package com.battercodelab.basic.config.security;
+package com.battercodelab.auth.config.security;
 
-import com.battercodelab.basic.entity.Member;
-import com.battercodelab.basic.service.UserDetailsImpl;
+import com.battercodelab.auth.entity.Member;
+import com.battercodelab.auth.service.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.context.SecurityContextHolder;

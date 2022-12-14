@@ -30,6 +30,7 @@ public class MemberController {
         Member member = memberService.registerUser(request);
         SignupDto.Response response = memberMapper.toSignupResponseDto(member);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
+//        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping(value = "/login")
@@ -38,5 +39,6 @@ public class MemberController {
         final String token = memberService.generateToken(userDetails.getUsername());
         LoginDto.Response response = memberMapper.toLoginResponseDto(((UserDetailsImpl) userDetails).getMember(), token);
         return new ResponseEntity<>(response, HttpStatus.OK);
+//        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
