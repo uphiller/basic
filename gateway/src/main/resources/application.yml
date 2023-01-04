@@ -1,0 +1,64 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${databaseUrl}
+    username: ${databaseUser}
+    password: ${databasePwd}
+
+  jpa:
+    generate-ddl: true
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+      org:
+        hibernate:
+          envers:
+            audit_table_suffix: _history
+            revision_field_name: rev_id
+            revision_type_field_name: rev_type
+
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9090/realms/test
+          jwk-set-uri: http://localhost:9090/realms/test/protocol/openid-connect/certs
+#      client:
+#        provider:
+#          keycloak:
+#            issuer-uri: http://localhost:9090/realms/test
+#            token-uri: http://localhost:9090/realms/test/protocol/openid-connect/token
+#            user-info-uri: http://localhost:9090/realms/test/protocol/openid-connect/userinfo
+#        registration:
+#          keycloak:
+#            client-id: demo-client
+#            authorization-grant-type: authorization_code
+#            scope: openid, password, profile
+
+cloud:
+  aws:
+    stack:
+      auto: false
+    credentials:
+      use-default-aws-credentials-chain: true
+    s3:
+      bucket: springboot-guide-images
+      url: https://springboot-guide-images.s3.ap-northeast-2.amazonaws.com/
+    region:
+      static: ap-northeast-2
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+    org.springframework.boot.autoconfigure: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
